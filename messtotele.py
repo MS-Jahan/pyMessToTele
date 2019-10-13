@@ -11,9 +11,11 @@ import string
 from pygtail import Pygtail
 
 
-TOKEN = '' #Add Bot Token
-CHAT_ID = '' #Add your Chat ID (goto 'https://api.telegram.org/bot<token>/getupdates' for Chat ID) 
+TOKEN = '' #Add Bot Token (Search 'Botfather', follow instruction, create bot and get token).
+CHAT_ID = '' #Add your Chat ID (goto 'https://api.telegram.org/bot<token>/getupdates' for Chat ID). 
 
+# Use '/setinline' and '/setinlinefeedback' one after another and follow their instructions to enable InlineQuery for 
+# your telegram bot.
 
 #bot = telepot.Bot(TOKEN)
 t = ''
