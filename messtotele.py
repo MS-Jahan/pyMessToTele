@@ -1,4 +1,5 @@
 import sys
+import os
 import time
 import telepot
 from telepot.loop import MessageLoop
@@ -10,7 +11,6 @@ from getpass import getpass
 import string
 from pygtail import Pygtail
 
-
 TOKEN = '' #Add Bot Token (Search 'Botfather', follow instruction, create bot and get token).
 CHAT_ID = '' #Add your Chat ID (goto 'https://api.telegram.org/bot<token>/getupdates' for Chat ID). 
 
@@ -20,8 +20,11 @@ CHAT_ID = '' #Add your Chat ID (goto 'https://api.telegram.org/bot<token>/getupd
 #bot = telepot.Bot(TOKEN)
 t = ''
 user = ''
-step = 1
+step = 0
 q_data = ''
+dirpath = 'D:\\image.jpg'
+
+
 
 
 def normalSend(msg, receiver_id):
@@ -36,15 +39,54 @@ def normalSend(msg, receiver_id):
 
 
 def on_chat_message(msg):
+    try:
+        os.remove(dirpath)
+    except:
+        None
+    else:
+        print('Error!')
     content_type, chat_type, chat_id = telepot.glance(msg)
-    messageText = msg['text'].decode("utf-8")
-    messageInput(messageText)
-    '''keyboard = InlineKeyboardMarkup(inline_keyboard=[
-                   [InlineKeyboardButton(text='Reply to ' + user, callback_data= t)],
-               ])
-    client.send(Message(text = msg), thread_id= t, thread_type=ThreadType.USER)
-    #bot.sendMessage(chat_id = CHAT_ID, msg['text'], reply_markup=keyboard)
-    '''
+    print(msg)
+    print(content_type)
+    if content_type == 'text':
+        try:
+            messageText = msg['text'].decode("utf-8")           
+        except:
+            messageText = msg['text']
+        else:
+            messageText = msg['text']
+        messageInput(messageText, 'text')
+    
+        
+    elif content_type == 'document' or content_type == 'photo':
+        try:
+            bot.download_file(msg['document']['file_id'], dirpath)
+            messageText = dirpath
+            messageInput(messageText, 'photo')
+        except:
+            ttt = str(msg)
+            substr = ttt[209:268]
+            substr = str(substr)
+            print(substr)
+            bot.download_file(substr, dirpath)
+            messageText = dirpath
+            messageInput(messageText, 'photo')
+        '''else:
+            bot.sendMessage(CHAT_ID, 'Cannot send this type of files.')'''
+    
+    
+    
+    
+    
+    
+    
+    
+'''keyboard = InlineKeyboardMarkup(inline_keyboard=[
+               [InlineKeyboardButton(text='Reply to ' + user, callback_data= t)],
+           ])
+client.send(Message(text = msg), thread_id= t, thread_type=ThreadType.USER)
+#bot.sendMessage(chat_id = CHAT_ID, msg['text'], reply_markup=keyboard)
+'''
 
 
 class CustomClient(Client):
@@ -56,23 +98,37 @@ class CustomClient(Client):
             user = thread.name
             if author_id != self.uid:
                 if thread_type != ThreadType.GROUP:
-                    print(str(thread_id) + " " + str(thread_type))
-                    #user = client.fetchUserInfo(user_id)[user_id]
-                    text = thread.name + ": " + message_object.text
-                    #on_chat_message(text)
-                    #bot.sendMessage(CHAT_ID, text)
-                    normalSend(text, t)
+                    if message_object.text:
+                        print(str(thread_id) + " " + str(thread_type))
+                        #user = client.fetchUserInfo(user_id)[user_id]
+                        text = thread.name + ": " + message_object.text
+                        #on_chat_message(text)
+                        #bot.sendMessage(CHAT_ID, text)
+                        normalSend(text, t)
+                    elif len(message_object.attachments) > 0:
+                        for i in message_object.attachments:
+                            if isinstance(i, ImageAttachment):
+                                text = thread.name + ": " + i.large_preview_url
+                                normalSend(text, t)
+                    else:
+                        text = thread.name + " has sent you something! Check it on " + "https://www.facebook.com/messages/t/" + author_id
 
-def messageInput(Text):#######
+def messageInput(Text, type):#######
     global step, no1, q_data
     if step == 1:
         bot.sendMessage(CHAT_ID, Text)
         step = 2
     elif step == 2:
-        no1 = Text
-        client.send(Message(text= no1), thread_id = q_data, thread_type=ThreadType.USER)
-        step = 1
-
+        if type == 'text':
+            no1 = Text
+            client.send(Message(text = no1), thread_id = q_data, thread_type=ThreadType.USER)
+            step = 1
+        elif type == 'photo' or type == 'document':
+            client.sendLocalImage(Text, message=Message(text= None), thread_id=q_data, thread_type=ThreadType.USER)
+            step = 1
+            bot.sendMessage(CHAT_ID, 'File was sent!')
+    else:
+        bot.sendMessage(CHAT_ID, 'Please click on any button from any recipient first!')
 
 def on_callback_query(msg):
     query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query')
@@ -80,11 +136,12 @@ def on_callback_query(msg):
     #print('Reply to ' + t)
     #bot.answerCallbackQuery(query_id, text='Got it')
     #bot.sendMessage(from_id, 'Reply to ' + t + ':')
-    global q_data
+    global q_data, step
+    step = 1
     q_data = query_data
     thread = client.fetchThreadInfo(query_data)[query_data]
     messageText = 'Reply to ' + thread.name + ':'
-    messageInput(messageText)
+    messageInput(messageText, 'text')
     
     
     
