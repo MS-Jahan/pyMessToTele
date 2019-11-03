@@ -25,7 +25,8 @@ Please place your Chat ID and Bot Token in the script. No need to add facebook p
 2. Change directory to project folder: `cd pyMessToTele`
 3. Install essential modules: `python2 -m pip install telepot fbchat getpass pickle --user`
 4. Make changes in your script according to **Before Running The Script**.
-5. Now you will be able to receive and respond to messages from Facebook Messenger from Telegram :-)
+5. Run your script: `python2 messtotele.py`
+6. Now you will be able to receive and respond to messages from Facebook Messenger from Telegram. :-)
 
 ## ToDo
 
