@@ -12,7 +12,7 @@ from fbchat.models import *
 import pickle
 from getpass import getpass
 import string
-from pygtail import Pygtail
+
 
 
 
