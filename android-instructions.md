@@ -9,7 +9,7 @@ To use this python tool on Android, you have to install a linux terminal emulato
 <li>Install necessary python modules: <code>python2 -m pip install telepot fbchat getpass pickle --user</code></li>
 <li>Change directory to this project folder: <code>cd pyMessToTele</code></li>
 <li>Make changes in your script according to <b>Before Running The Script</b> in the <a href='https://github.com/MS-Jahan/pyMessToTele/blob/master/README.md'>README.md</a>.</li>
-<li>Now run the script: <code>python3 run.py</code></li>
+<li>Now run the script: <code>python2 messtotele.py</code></li>
 <li>Type your email and password when asked. Password will not be visible when typing.</li>
 <li>Now your bot is running!</li>
 </ol>
