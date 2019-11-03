@@ -32,7 +32,7 @@ t = ''
 user = ''
 step = 0
 q_data = ''
-dirpath = 'D:\\image.jpg'
+dirpath = 'images/images.jpg' #For Windows, use // instead of /.
 
 
 
