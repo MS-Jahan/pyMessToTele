@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-import sys
+#import sys
 import os
-import time
+#import time
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
@@ -11,7 +11,7 @@ from fbchat import Client
 from fbchat.models import *
 import pickle
 from getpass import getpass
-import string
+#import string
 
 
 
