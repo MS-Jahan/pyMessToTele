@@ -29,17 +29,16 @@ Please place your Chat ID and Bot Token in the script. No need to add facebook p
 6. Type your email and password when asked. Password will not be visible when typing.
 7. Now you will be able to receive and respond to messages from Facebook Messenger from Telegram. :-)
 
+Run this script on Android using [these instructions](https://github.com/MS-Jahan/pyMessToTele/blob/master/android-instructions.md).
+
 ## ToDo
 
 - [x] Inline buttons.
 - [x] Send photo from Telegram to Messenger.
-- [ ] Send media (photo, video, gif, voice) from Messenger to Telegram.
+- [ ] Receive media (photo, video, gif, voice, sticker) from Messenger to Telegram.
 - [ ] Group and private chat support
 - [x] Easily change current chat.
 - [x] Show Contact List of Messenger in Telegram
-- [x] Multilanguage option.
-- [ ] Support for Gif.
-- [ ] Support for Stickers of Messenger.
 - [x] Support for file attachments.
 
 ### Similar Project
