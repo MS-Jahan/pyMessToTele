@@ -13,7 +13,8 @@ import pickle
 from getpass import getpass
 #import string
 
-
+email = 'randomemail1@yahoo.com' #Facebook Email
+password = 'zxxcqwer1234zx' #Facebook Password
 
 
 
@@ -254,27 +255,21 @@ def handle(msg):
     #bot.sendMessage(onMessage(message_id = client.send(Message(text=text_cmd), thread_id='100040523581208', thread_type=ThreadType.USER)))
     
  '''
-
-
-
     
         
-
-        
-
-      
-        
+cookies = {}
 try:
-	print('Checking for cookies...')
-	session_cookies = pickle.load(open('cookies.p','rb'))
-	client = CustomClient("cookie", "cookie", session_cookies = session_cookies) # replace your username and password here
-	print('Cookies found!')
+    # Load the session cookies
+    with open('session.json', 'r') as f:
+        cookies = json.load(f)
 except:
-    print('Cookies not found. Please enter credentials.')
-    client = CustomClient(raw_input('Email: '), getpass('Password: ')) # replace your username and password here
-    session = client.getSession()
-    pickle.dump(session, open('cookies.p','wb'))
-    print('Cookies saved to cookies.p file.')
+    # If it fails, never mind, we'll just login again
+    pass
+
+client = CustomClient(email, password, session_cookies=cookies)
+with open('session.json', 'w') as f:
+    json.dump(client.getSession(), f)
+
 
 
 bot = telepot.Bot(TOKEN)
