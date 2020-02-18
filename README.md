@@ -36,7 +36,7 @@ Run this script on Android using [these instructions](https://github.com/MS-Jaha
 - [x] Inline buttons.
 - [x] Send photo from Telegram to Messenger.
 - [ ] Receive media (photo, video, gif, voice, sticker) from Messenger to Telegram.
-- [ ] Group and private chat support
+- [ ] Group chat support
 - [x] Easily change current chat.
 - [x] Show Contact List of Messenger in Telegram
 - [x] Support for file attachments.
