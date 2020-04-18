@@ -1,3 +1,6 @@
+# [THIS THING ISN'T WORKING RIGHT NOW (fbchat module issue). USE IT IF YOU CAN DEBUG AND LET ME KNOW IF YOU CAN.]
+
+
 # pyMessToTele
 Reply to Messenger messages from Telegram.
 
